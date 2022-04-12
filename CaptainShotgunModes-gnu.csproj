@@ -23,6 +23,7 @@
     <DebugType>None</DebugType>
     <GenerateDependencyFile>yiff</GenerateDependencyFile>
     <NoLogo>True</NoLogo>
+    <NoWin32Manifest>True</NoWin32Manifest>
     <Optimize>True</Optimize>
     <OutDir>out</OutDir>
     <TargetFramework>netstandard2.0</TargetFramework>

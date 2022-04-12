@@ -1,3 +1,7 @@
+# Caution! Disclaim!!1
+
+This is my custom fork of [Vl4dimyr](https://github.com/Vl4dimyr)'s **[CaptainShotgunModes](https://github.com/Vl4dimyr/CaptainShotgunModes)** for me and my furiend group. You'll probably want to get the [OG version](https://thunderstore.io/package/Vl4dimyr/CaptainShotgunModes) for yourself. You won't get any support for this version. You've been warned!
+
 # CaptainShotgunModes
 
 ## Description
@@ -66,19 +70,5 @@ EnableModeSelectionWithDPad = false
 ## Manual Install
 
 - Install [BepInEx](https://thunderstore.io/package/bbepis/BepInExPack/) and [R2API](https://thunderstore.io/package/tristanmcpherson/R2API/)
-- Download the latest `CaptainShotgunModes_x.y.z.zip` [here](https://thunderstore.io/package/Vl4dimyr/CaptainShotgunModes/)
+- Download the latest `CaptainShotgunModes_x.y.z.zip` TODO
 - Extract and move the `CaptainShotgunModes.dll` into the `\BepInEx\plugins` folder
-
-## Changelog
-
-The [Changelog](https://github.com/Vl4dimyr/CaptainShotgunModes/blob/master/CHANGELOG.md) can be found on GitHub.
-
-## Bugs/Feedback
-
-For bugs or feedback please use [GitHub Issues](https://github.com/Vl4dimyr/CaptainShotgunModes/issues).
-
-## Help me out
-
-[![Patreon](https://cdn.iconscout.com/icon/free/png-64/patreon-2752105-2284922.png)](https://www.patreon.com/vl4dimyr)
-
-It is by no means required, but if you would like to support me head over to [my Patreon](https://www.patreon.com/vl4dimyr).

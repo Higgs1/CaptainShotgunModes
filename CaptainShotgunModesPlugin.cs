@@ -80,7 +80,69 @@ namespace CaptainShotgunModes {
       fireMode = newFireMode;
     }
 
-    private void InitConfig() {
+    private void SelectFireModeWithNumberKeys() {
+      if (EnableModeSelectionWithNumberKeys.Value) {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+          fireMode = FireMode.Normal;
+        } else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+          fireMode = FireMode.Auto;
+        } else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+          fireMode = FireMode.AutoCharge;
+        }
+      }
+    }
+
+    private void SelectFireModeWithMouseWheel() {
+      if (EnableModeSelectionWithMouseWheel.Value) {
+        float wheel = Input.GetAxis("Mouse ScrollWheel");
+
+        if (wheel != 0) {
+          // scroll down => forward; scroll up => backward
+          CycleFireMode(wheel < 0f);
+        }
+      }
+    }
+
+    private void SelectFireModeWithDPad() {
+      if (EnableModeSelectionWithDPad.Value) {
+        if (DPad.GetInputDown(DPadInput.Right) || DPad.GetInputDown(DPadInput.Down)) {
+          CycleFireMode();
+        } else if (DPad.GetInputDown(DPadInput.Left) || DPad.GetInputDown(DPadInput.Up)) {
+          CycleFireMode(false);
+        }
+      }
+    }
+
+    public void FixedUpdateHook(On_ChargeCaptainShotgun.orig_FixedUpdate orig, ChargeCaptainShotgun self) {
+      fixedAge += Time.fixedDeltaTime;
+
+      switch (fireMode) {
+        case FireMode.Auto:
+          AutoFireMode(orig, self);
+          break;
+        case FireMode.AutoCharge:
+          AutoFireChargeMode(orig, self);
+          break;
+        default:
+          // fallback to single fire mode
+          SingleFireMode(orig, self);
+          break;
+      }
+    }
+
+    public void UpdateHook(On.RoR2.UI.SkillIcon.orig_Update orig, SkillIcon self) {
+      orig.Invoke(self);
+
+      if (self.targetSkill && self.targetSkillSlot == SkillSlot.Primary) {
+        if (self.targetSkill.characterBody.baseNameToken == "CAPTAIN_BODY_NAME") {
+          self.stockText.gameObject.SetActive(true);
+          self.stockText.fontSize = 12f;
+          self.stockText.SetText(fireMode.ToString());
+        }
+      }
+    }
+
+    public void Awake() {
       DefaultMode = Config.Bind <string> (
         "Settings",
         "DefaultMode",
@@ -108,104 +170,12 @@ namespace CaptainShotgunModes {
         true,
         "When set to true modes can be cycled through using the DPad (controller)"
       );
-    }
-
-    private void HandleConfig() {
+      
       try {
         fireMode = (FireMode) Enum.Parse(typeof (FireMode), DefaultMode.Value);
       } catch (Exception) {
         fireMode = FireMode.Normal;
       }
-    }
-
-    private void SelectFireModeWithNumberKeys() {
-      if (!EnableModeSelectionWithNumberKeys.Value) {
-        return;
-      }
-
-      if (Input.GetKeyDown(KeyCode.Alpha1)) {
-        fireMode = FireMode.Normal;
-
-        return;
-      }
-
-      if (Input.GetKeyDown(KeyCode.Alpha2)) {
-        fireMode = FireMode.Auto;
-
-        return;
-      }
-
-      if (Input.GetKeyDown(KeyCode.Alpha3)) {
-        fireMode = FireMode.AutoCharge;
-      }
-    }
-
-    private void SelectFireModeWithMouseWheel() {
-      if (!EnableModeSelectionWithMouseWheel.Value) {
-        return;
-      }
-
-      float wheel = Input.GetAxis("Mouse ScrollWheel");
-
-      if (wheel == 0) {
-        return;
-      }
-
-      // scroll down => forward; scroll up => backward
-      CycleFireMode(wheel < 0f);
-    }
-
-    private void SelectFireModeWithDPad() {
-      if (!EnableModeSelectionWithDPad.Value) {
-        return;
-      }
-
-      if (DPad.GetInputDown(DPadInput.Right) || DPad.GetInputDown(DPadInput.Down)) {
-        CycleFireMode();
-
-        return;
-      }
-
-      if (DPad.GetInputDown(DPadInput.Left) || DPad.GetInputDown(DPadInput.Up)) {
-        CycleFireMode(false);
-      }
-    }
-
-    public void FixedUpdateHook(On_ChargeCaptainShotgun.orig_FixedUpdate orig, ChargeCaptainShotgun self) {
-      fixedAge += Time.fixedDeltaTime;
-
-      switch (fireMode) {
-      case FireMode.Normal:
-        SingleFireMode(orig, self);
-        break;
-      case FireMode.Auto:
-        AutoFireMode(orig, self);
-        break;
-      case FireMode.AutoCharge:
-        AutoFireChargeMode(orig, self);
-        break;
-      default:
-        // fallback to single fire mode
-        SingleFireMode(orig, self);
-        break;
-      }
-    }
-
-    public void UpdateHook(On.RoR2.UI.SkillIcon.orig_Update orig, SkillIcon self) {
-      orig.Invoke(self);
-
-      if (self.targetSkill && self.targetSkillSlot == SkillSlot.Primary) {
-        if (self.targetSkill.characterBody.baseNameToken == "CAPTAIN_BODY_NAME") {
-          self.stockText.gameObject.SetActive(true);
-          self.stockText.fontSize = 12f;
-          self.stockText.SetText(fireMode.ToString());
-        }
-      }
-    }
-
-    public void Awake() {
-      InitConfig();
-      HandleConfig();
 
       On_ChargeCaptainShotgun.FixedUpdate += FixedUpdateHook;
       On.RoR2.UI.SkillIcon.Update += UpdateHook;

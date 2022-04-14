@@ -13,7 +13,7 @@ namespace CaptainShotgunModes {
 
   [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
   [BepInDependency("com.rune580.riskofoptions")]
-  [BepInPlugin("CaptainShotgunModes", "Captain Shotgun Modes", "1.2.0")]
+  [BepInPlugin("CaptainShotgunModes", "Captain Shotgun Modes", "1.2.1")]
   [NetworkCompatibility(CompatibilityLevel.NoNeedForSync, VersionStrictness.DifferentModVersionsAreOk)]
   public class CaptainShotgunModesPlugin: BaseUnityPlugin {
     public static ConfigEntry<FireMode> DefaultMode;

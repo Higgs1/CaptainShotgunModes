@@ -22,6 +22,7 @@
     <CreateHardLinksForCopyFilesToOutputDirectoryIfPossible>True</CreateHardLinksForCopyFilesToOutputDirectoryIfPossible>
     <DebugSymbols>False</DebugSymbols>
     <DebugType>None</DebugType>
+    <Deterministic>True</Deterministic>
     <GenerateDependencyFile>yiff</GenerateDependencyFile>
     <NoLogo>True</NoLogo>
     <NoWin32Manifest>True</NoWin32Manifest>

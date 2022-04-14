@@ -2,6 +2,7 @@ using BepInEx;
 using BepInEx.Configuration;
 using EntityStates.Captain.Weapon;
 using R2API.Utils;
+using RiskOfOptions;
 using RoR2;
 using RoR2.UI;
 using System;
@@ -12,6 +13,7 @@ namespace CaptainShotgunModes {
   enum FireMode { Normal, Auto, AutoCharge, Count }
 
   [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
+  [BepInDependency("com.rune580.riskofoptions")]
   [BepInPlugin("de.userstorm.captainshotgunmodes", "CaptainShotgunModes", "1.2.0")]
   [NetworkCompatibility(CompatibilityLevel.NoNeedForSync, VersionStrictness.DifferentModVersionsAreOk)]
   public class CaptainShotgunModesPlugin: BaseUnityPlugin {

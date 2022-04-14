@@ -11,8 +11,9 @@
     <!-- notouch! -->
     <AssemblySearchPaths>
       $(BepInExPath)/core;
-      $(BepInExPath)/plugins/tristanmcpherson-R2API/R2API;
       $(BepInExPath)/plugins/RiskofThunder-HookGenPatcher/MMHOOK;
+      $(BepInExPath)/plugins/Rune580-Risk_Of_Options;
+      $(BepInExPath)/plugins/tristanmcpherson-R2API/R2API;
       $(RoR2AssemblyPath);
       $(AssemblySearchPaths);
     </AssemblySearchPaths>
@@ -36,6 +37,7 @@
       BepInEx;
       MMHOOK_Assembly-CSharp;
       R2API;
+      RiskOfOptions;
       RoR2;
       UnityEngine;
       UnityEngine.CoreModule;

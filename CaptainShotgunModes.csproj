@@ -61,7 +61,7 @@
   </Target>
   
   <Target Name="GenerateIco" BeforeTargets="BeforeBuild" Inputs="images/icon.png" Outputs="$(BaseIntermediateOutputPath)/icon.ico">
-    <Exec Command="convert images/icon.png $(BaseIntermediateOutputPath)/icon.ico" />
+    <Exec Command="convert 'images/icon.png' '$(BaseIntermediateOutputPath)/icon.ico'" />
   </Target>
 
 </Project>

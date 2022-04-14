@@ -17,12 +17,14 @@
       $(RoR2AssemblyPath);
       $(AssemblySearchPaths);
     </AssemblySearchPaths>
+    <ApplicationIcon>$(BaseIntermediateOutputPath)/icon.ico</ApplicationIcon>
     <CopyDocumentationFileToOutputDirectory>False</CopyDocumentationFileToOutputDirectory>
     <CreateHardLinksForAdditionalFilesIfPossible>True</CreateHardLinksForAdditionalFilesIfPossible>
     <CreateHardLinksForCopyFilesToOutputDirectoryIfPossible>True</CreateHardLinksForCopyFilesToOutputDirectoryIfPossible>
     <DebugSymbols>False</DebugSymbols>
     <DebugType>None</DebugType>
     <Deterministic>True</Deterministic>
+    <ErrorReport>none</ErrorReport>
     <GenerateDependencyFile>yiff</GenerateDependencyFile>
     <LangVersion>latest</LangVersion>
     <NoLogo>True</NoLogo>
@@ -56,6 +58,10 @@
 
   <Target Name="ZipOutputPath" AfterTargets="Build">
     <ZipDirectory Overwrite="True" SourceDirectory="$(OutDir)" DestinationFile="Unknown-CaptainShotgunModes.zip" />
+  </Target>
+  
+  <Target Name="GenerateIco" BeforeTargets="BeforeBuild" Inputs="images/icon.png" Outputs="$(BaseIntermediateOutputPath)/icon.ico">
+    <Exec Command="convert images/icon.png $(BaseIntermediateOutputPath)/icon.ico" />
   </Target>
 
 </Project>

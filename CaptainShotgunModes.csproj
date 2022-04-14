@@ -24,6 +24,7 @@
     <DebugType>None</DebugType>
     <Deterministic>True</Deterministic>
     <GenerateDependencyFile>yiff</GenerateDependencyFile>
+    <LangVersion>latest</LangVersion>
     <NoLogo>True</NoLogo>
     <NoWin32Manifest>True</NoWin32Manifest>
     <Optimize>True</Optimize>

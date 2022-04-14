@@ -24,17 +24,17 @@ namespace CaptainShotgunModes {
     public static ConfigEntry<KeyboardShortcut> SelectAutoMode;
     public static ConfigEntry<KeyboardShortcut> SelectAutoChargeMode;
 
-    private FireMode fireMode = FireMode.Normal;
-    private float fixedAge = 0;
+    FireMode fireMode = FireMode.Normal;
+    float fixedAge = 0;
 
-    private void SingleFireMode(On_ChargeCaptainShotgun.orig_FixedUpdate orig, ChargeCaptainShotgun self) {
+    void SingleFireMode(On_ChargeCaptainShotgun.orig_FixedUpdate orig, ChargeCaptainShotgun self) {
       orig.Invoke(self);
 
       if (self.GetFieldValue <bool> ("released"))
         fixedAge = 0;
     }
 
-    private void AutoFireMode(On_ChargeCaptainShotgun.orig_FixedUpdate orig, ChargeCaptainShotgun self) {
+    void AutoFireMode(On_ChargeCaptainShotgun.orig_FixedUpdate orig, ChargeCaptainShotgun self) {
       var didFire = false;
       var released = self.GetFieldValue <bool> ("released");
 
@@ -67,7 +67,7 @@ namespace CaptainShotgunModes {
         self.SetFieldValue("released", false);
     }
 
-    private void CycleFireMode(bool forward = true) {
+    void CycleFireMode(bool forward = true) {
       FireMode newFireMode = fireMode + (forward ? 1 : -1);
 
       if ((int) newFireMode == 3)

@@ -2,6 +2,13 @@
 
 This is my custom fork of [Vl4dimyr](https://github.com/Vl4dimyr)'s **[CaptainShotgunModes](https://github.com/Vl4dimyr/CaptainShotgunModes)** for me and my furiend group. You'll probably want to get the [OG version](https://thunderstore.io/package/Vl4dimyr/CaptainShotgunModes) for yourself. You won't get any support for this version. You've been warned!
 
+## Compiling
+
+- Something
+- Something
+- Something
+- `msbuild -noLogo -m -r`
+
 # CaptainShotgunModes
 
 ## Description

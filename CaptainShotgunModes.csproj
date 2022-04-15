@@ -5,7 +5,6 @@
     <!--Change this path if required-->
     <BepInExPath>$(HOME)/.config/r2modmanPlus-local/RiskOfRain2/profiles/Default/BepInEx</BepInExPath>
     
-    <!-- notouch! -->
     <AssemblySearchPaths>
       $(BepInExPath)/plugins/RiskofThunder-HookGenPatcher/MMHOOK;
       $(BepInExPath)/plugins/Rune580-Risk_Of_Options;
@@ -31,11 +30,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="
-      MMHOOK_Assembly-CSharp;
-      R2API;
-      RiskOfOptions;
-    ">
+    <Reference Include="MMHOOK_Assembly-CSharp;R2API;RiskOfOptions;">
       <Private>False</Private>
     </Reference>
     <PackageReference Include="BepInEx.BaseLib" Version="5.4.19" />

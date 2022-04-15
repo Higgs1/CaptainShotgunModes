@@ -7,7 +7,7 @@ This is my custom fork of [Vl4dimyr](https://github.com/Vl4dimyr)'s **[CaptainSh
 - Something
 - Something
 - Something
-- `msbuild -noLogo -m -r`
+- `msbuild -nologo -m -r`
 
 # CaptainShotgunModes
 

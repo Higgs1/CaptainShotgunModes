@@ -4,7 +4,6 @@ using EntityStates.Captain.Weapon;
 using R2API.Utils;
 using RoR2;
 using RoR2.UI;
-using System;
 using UnityEngine;
 using On_ChargeCaptainShotgun = On.EntityStates.Captain.Weapon.ChargeCaptainShotgun;
 

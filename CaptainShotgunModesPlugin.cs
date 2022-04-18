@@ -11,29 +11,30 @@ namespace CaptainShotgunModes {
   public enum FireMode { Normal, Auto, AutoCharge }
 
   [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
-  [BepInDependency("com.rune580.riskofoptions")]
+  [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
   [BepInPlugin("CaptainShotgunModes", "Captain Shotgun Modes", "1.2.1")]
   [NetworkCompatibility(CompatibilityLevel.NoNeedForSync, VersionStrictness.DifferentModVersionsAreOk)]
   public class CaptainShotgunModesPlugin: BaseUnityPlugin {
     public static ConfigEntry<FireMode> DefaultMode;
     public static ConfigEntry<bool> EnableModeSelectionWithMouseWheel;
     public static ConfigEntry<bool> EnableModeSelectionWithDPad;
-    
     public static ConfigEntry<KeyboardShortcut> SelectNormalMode;
     public static ConfigEntry<KeyboardShortcut> SelectAutoMode;
     public static ConfigEntry<KeyboardShortcut> SelectAutoChargeMode;
 
-    FireMode fireMode = FireMode.Normal;
-    float fixedAge = 0;
+    private static readonly int FireModeCount = System.Enum.GetNames(typeof(FireMode)).Length;
 
-    void SingleFireMode(On_ChargeCaptainShotgun.orig_FixedUpdate orig, ChargeCaptainShotgun self) {
+    private FireMode fireMode = FireMode.Normal;
+    private float fixedAge = 0;
+
+    private void SingleFireMode(On_ChargeCaptainShotgun.orig_FixedUpdate orig, ChargeCaptainShotgun self) {
       orig.Invoke(self);
 
       if (self.GetFieldValue <bool> ("released"))
         fixedAge = 0;
     }
 
-    void AutoFireMode(On_ChargeCaptainShotgun.orig_FixedUpdate orig, ChargeCaptainShotgun self) {
+    private void AutoFireMode(On_ChargeCaptainShotgun.orig_FixedUpdate orig, ChargeCaptainShotgun self) {
       var didFire = false;
       var released = self.GetFieldValue <bool> ("released");
 
@@ -66,10 +67,10 @@ namespace CaptainShotgunModes {
         self.SetFieldValue("released", false);
     }
 
-    void CycleFireMode(bool forward = true) {
+    private void CycleFireMode(bool forward = true) {
       FireMode newFireMode = fireMode + (forward ? 1 : -1);
 
-      if ((int) newFireMode == 3)
+      if ((int) newFireMode == FireModeCount)
         fireMode = FireMode.Normal;
       else if ((int) newFireMode == -1)
         fireMode = FireMode.AutoCharge;
@@ -83,14 +84,14 @@ namespace CaptainShotgunModes {
       switch (fireMode) {
         case FireMode.Auto:
           AutoFireMode(orig, self);
-          break;
+          return;
         case FireMode.AutoCharge:
           AutoFireChargeMode(orig, self);
-          break;
+          return;
         default:
           // fallback to single fire mode
           SingleFireMode(orig, self);
-          break;
+          return;
       }
     }
 
@@ -147,12 +148,8 @@ namespace CaptainShotgunModes {
         "Sets firing mode to Auto Charge."
       );
       
-      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.ChoiceOption(DefaultMode));
-      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(SelectNormalMode));
-      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(SelectAutoMode));
-      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(SelectAutoChargeMode));
-      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(EnableModeSelectionWithMouseWheel));
-      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(EnableModeSelectionWithDPad));
+      if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("com.rune580.riskofoptions"))
+        InitRoo();
 
       fireMode = DefaultMode.Value;
       
@@ -160,7 +157,20 @@ namespace CaptainShotgunModes {
       On.RoR2.UI.SkillIcon.Update += UpdateHook;
     }
     
-    bool IsKeyDown(KeyboardShortcut shortcut) {
+    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    private void InitRoo() {
+      RiskOfOptions.ModSettingsManager.SetModDescription(
+          "This mod allows you to choose between 3 firing modes for the captain's shotgun"
+      );
+      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.ChoiceOption(DefaultMode));
+      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(SelectNormalMode));
+      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(SelectAutoMode));
+      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.KeyBindOption(SelectAutoChargeMode));
+      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(EnableModeSelectionWithMouseWheel));
+      RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(EnableModeSelectionWithDPad));
+    }
+    
+    private bool IsKeyDown(KeyboardShortcut shortcut) {
       if (shortcut.MainKey == KeyCode.None)
         return false;
       foreach (var i in shortcut.Modifiers)

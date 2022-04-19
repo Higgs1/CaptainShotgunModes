@@ -33,13 +33,7 @@
   <ItemGroup>
     <Reference Include="MMHOOK_Assembly-CSharp;RiskOfOptions" Private="False" />
     <EmbeddedResource Include="images/icon.png" LogicalName="icon" />
-    <PackageReference Version="*-*" Include="
-      BepInEx.BaseLib;
-      R2API;
-      RiskOfRain2.GameLibs;
-      UnityEngine.Modules;
-      UnityEngine;
-    " />
+    <PackageReference Include="BepInEx.BaseLib;R2API;RiskOfRain2.GameLibs;UnityEngine.Modules;UnityEngine;" Version="*-*" />
     <None CopyToOutputDirectory="PreserveNewest" Include="images/icon.png" Link="icon.png" />
     <None CopyToOutputDirectory="PreserveNewest" Include="manifest.json;README.md" />
   </ItemGroup>

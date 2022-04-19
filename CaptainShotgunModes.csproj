@@ -12,6 +12,7 @@
       $(AssemblySearchPaths);
     </AssemblySearchPaths>
     <ApplicationIcon>$(BaseIntermediateOutputPath)/icon.ico</ApplicationIcon>
+    <Configuration>Release</Configuration>
     <CopyDocumentationFileToOutputDirectory>False</CopyDocumentationFileToOutputDirectory>
     <CreateHardLinksForAdditionalFilesIfPossible>True</CreateHardLinksForAdditionalFilesIfPossible>
     <CreateHardLinksForCopyFilesToOutputDirectoryIfPossible>True</CreateHardLinksForCopyFilesToOutputDirectoryIfPossible>

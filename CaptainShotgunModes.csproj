@@ -19,6 +19,7 @@
     <DebugType>None</DebugType>
     <Deterministic>True</Deterministic>
     <ErrorReport>none</ErrorReport>
+    <Features>strict</Features>
     <GenerateDependencyFile>yiff</GenerateDependencyFile>
     <LangVersion>latest</LangVersion>
     <NoLogo>True</NoLogo>

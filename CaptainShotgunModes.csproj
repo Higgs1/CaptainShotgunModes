@@ -31,7 +31,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="MMHOOK_Assembly-CSharp;R2API;RiskOfOptions;">
+    <Reference Include="MMHOOK_Assembly-CSharp;RiskOfOptions;">
       <Private>False</Private>
     </Reference>
     <EmbeddedResource Include="images/icon.png" LogicalName="icon" />

@@ -8,7 +8,6 @@
     <AssemblySearchPaths>
       $(BepInExPath)/plugins/RiskofThunder-HookGenPatcher/MMHOOK;
       $(BepInExPath)/plugins/Rune580-Risk_Of_Options;
-      $(BepInExPath)/plugins/tristanmcpherson-R2API/R2API;
       $(AssemblySearchPaths);
     </AssemblySearchPaths>
     <ApplicationIcon>$(BaseIntermediateOutputPath)/icon.ico</ApplicationIcon>
@@ -35,11 +34,12 @@
     <Reference Include="MMHOOK_Assembly-CSharp;R2API;RiskOfOptions;">
       <Private>False</Private>
     </Reference>
-    <PackageReference Include="BepInEx.BaseLib" Version="5.4.19" />
-    <PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.2-r.0" />
-    <PackageReference Include="UnityEngine.Modules" Version="2022.1.0-beta.10" />
-    <PackageReference Include="UnityEngine" Version="5.6.1" />
     <EmbeddedResource Include="images/icon.png" LogicalName="icon" />
+    <PackageReference Include="BepInEx.BaseLib" Version="*" />
+    <PackageReference Include="R2API" Version="*" />
+    <PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.3.1-r.0" />
+    <PackageReference Include="UnityEngine.Modules" Version="*" />
+    <PackageReference Include="UnityEngine" Version="*" />
     <None CopyToOutputDirectory="PreserveNewest" Include="images/icon.png" Link="icon.png" />
     <None CopyToOutputDirectory="PreserveNewest" Include="manifest.json" />
     <None CopyToOutputDirectory="PreserveNewest" Include="README.md" />

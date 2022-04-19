@@ -31,18 +31,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="MMHOOK_Assembly-CSharp;RiskOfOptions;">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="MMHOOK_Assembly-CSharp;RiskOfOptions" Private="False" />
     <EmbeddedResource Include="images/icon.png" LogicalName="icon" />
-    <PackageReference Include="BepInEx.BaseLib" Version="*" />
-    <PackageReference Include="R2API" Version="*" />
-    <PackageReference Include="RiskOfRain2.GameLibs" Version="*-*" />
-    <PackageReference Include="UnityEngine.Modules" Version="*" />
-    <PackageReference Include="UnityEngine" Version="*" />
+    <PackageReference Version="*-*" Include="
+      BepInEx.BaseLib;
+      R2API;
+      RiskOfRain2.GameLibs;
+      UnityEngine.Modules;
+      UnityEngine;
+    " />
     <None CopyToOutputDirectory="PreserveNewest" Include="images/icon.png" Link="icon.png" />
-    <None CopyToOutputDirectory="PreserveNewest" Include="manifest.json" />
-    <None CopyToOutputDirectory="PreserveNewest" Include="README.md" />
+    <None CopyToOutputDirectory="PreserveNewest" Include="manifest.json;README.md" />
   </ItemGroup>
 
   <Target Name="ZipOutputPath" AfterTargets="Build">

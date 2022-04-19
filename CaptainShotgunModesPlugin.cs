@@ -173,7 +173,7 @@ namespace CaptainShotgunModes {
         Texture2D texture = new Texture2D(0, 0);
         byte[] imgdata = new byte[stream.Length];
         stream.Read(imgdata, 0, (int) stream.Length);
-        if (texture.LoadImage(imgdata))
+        if (ImageConversion.LoadImage(texture, imgdata))
           RiskOfOptions.ModSettingsManager.SetModIcon(
             Sprite.Create(
               texture,

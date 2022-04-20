@@ -6,11 +6,10 @@
     <BepInExPath>$(HOME)/.config/r2modmanPlus-local/RiskOfRain2/profiles/Default/BepInEx</BepInExPath>
     
     <AssemblySearchPaths>
-      $(BepInExPath)/plugins/RiskofThunder-HookGenPatcher/MMHOOK;
       $(BepInExPath)/plugins/Rune580-Risk_Of_Options;
       $(AssemblySearchPaths);
     </AssemblySearchPaths>
-    <ApplicationIcon>$(BaseIntermediateOutputPath)/icon.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
     <Configuration>Release</Configuration>
     <CopyDocumentationFileToOutputDirectory>False</CopyDocumentationFileToOutputDirectory>
     <CreateHardLinksForAdditionalFilesIfPossible>True</CreateHardLinksForAdditionalFilesIfPossible>
@@ -30,9 +29,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="MMHOOK_Assembly-CSharp;RiskOfOptions" Private="False" />
+    <Reference Include="RiskOfOptions" Private="False" />
     <EmbeddedResource Include="images/icon.png" LogicalName="icon" />
-    <PackageReference Include="BepInEx.BaseLib;R2API;RiskOfRain2.GameLibs;UnityEngine.Modules;UnityEngine" Version="*-*" />
+    <PackageReference NoWarn="NU1701" Version="*-*" Include="
+      BepInEx.BaseLib;
+      MMHOOK.RoR2;
+      R2API;
+      RiskOfRain2.GameLibs;
+      UnityEngine;
+      UnityEngine.Modules;
+     " />
     <None CopyToOutputDirectory="PreserveNewest" Include="images/icon.png" Link="icon.png" />
     <None CopyToOutputDirectory="PreserveNewest" Include="manifest.json;README.md" />
   </ItemGroup>
@@ -41,8 +47,8 @@
     <ZipDirectory Overwrite="True" SourceDirectory="$(OutDir)" DestinationFile="Unknown-CaptainShotgunModes.zip" />
   </Target>
   
-  <Target Name="GenerateIco" BeforeTargets="BeforeBuild" Inputs="images/icon.png" Outputs="$(BaseIntermediateOutputPath)/icon.ico">
-    <Exec Command="convert 'images/icon.png' '$(BaseIntermediateOutputPath)/icon.ico'" />
+  <Target Name="GenerateIco" BeforeTargets="BeforeBuild" Inputs="images/icon.png" Outputs="icon.ico">
+    <Exec Command="convert 'images/icon.png' 'icon.ico'" />
   </Target>
 
 </Project>

@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <Reference Include="RiskOfOptions" Private="False" />
-    <EmbeddedResource Include="images/icon.png" LogicalName="icon" />
+    <EmbeddedResource Include="icon-notext.png" LogicalName="icon" />
     <PackageReference NoWarn="NU1701" Version="*-*" Include="
       BepInEx.BaseLib;
       MMHOOK.RoR2;
@@ -39,7 +39,6 @@
       UnityEngine;
       UnityEngine.Modules;
      " />
-    <None CopyToOutputDirectory="PreserveNewest" Include="images/icon.png" Link="icon.png" />
     <None CopyToOutputDirectory="PreserveNewest" Include="manifest.json;README.md" />
   </ItemGroup>
 
@@ -47,8 +46,20 @@
     <ZipDirectory Overwrite="True" SourceDirectory="$(OutDir)" DestinationFile="Unknown-CaptainShotgunModes.zip" />
   </Target>
   
-  <Target Name="GenerateIco" BeforeTargets="BeforeBuild" Inputs="images/icon.png" Outputs="icon.ico">
-    <Exec Command="convert 'images/icon.png' 'icon.ico'" />
+  <Target Name="GenerateIconPng" BeforeTargets="BeforeBuild" Inputs="icon.svg" Outputs="$(OutDir)icon.png">
+    <MakeDir Directories="$(OutDir)"/>
+    <Exec Command="rsvg-convert 'icon.svg' | convert png:- -colors 256 'png8:$(OutDir)icon.png'" />
+    <Exec Command="optipng -strip all -o7 -zm1-9 '$(OutDir)icon.png'" />
+  </Target>
+  
+  <Target Name="GenerateNoTextIconPng" BeforeTargets="BeforeBuild" Inputs="icon.svg" Outputs="icon-notext.png">
+    <MakeDir Directories="$(OutDir)"/>
+    <Exec Command="rsvg-convert -s notext.css 'icon.svg' | convert png:- -colors 256 'png8:icon-notext.png'" />
+    <Exec Command="optipng -strip all -o7 -zm1-9 'icon-notext.png'" />
+  </Target>
+  
+  <Target Name="GenerateIco" BeforeTargets="BeforeBuild" Inputs="$(OutDir)icon.png" Outputs="icon.ico">
+    <Exec Command="convert '$(OutDir)icon.png' 'icon.ico'" />
   </Target>
 
 </Project>

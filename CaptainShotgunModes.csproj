@@ -10,6 +10,7 @@
       $(AssemblySearchPaths);
     </AssemblySearchPaths>
     <ApplicationIcon>icon.ico</ApplicationIcon>
+    <BuildInParallel>True</BuildInParallel>
     <Configuration>Release</Configuration>
     <CopyDocumentationFileToOutputDirectory>False</CopyDocumentationFileToOutputDirectory>
     <CreateHardLinksForAdditionalFilesIfPossible>True</CreateHardLinksForAdditionalFilesIfPossible>

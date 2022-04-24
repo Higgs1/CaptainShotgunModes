@@ -44,7 +44,7 @@
   </ItemGroup>
 
   <Target Name="ZipOutputPath" AfterTargets="Build">
-    <ZipDirectory Overwrite="True" SourceDirectory="$(OutDir)" DestinationFile="Unknown-CaptainShotgunModes.zip" />
+    <ZipDirectory Overwrite="True" SourceDirectory="$(OutDir)" DestinationFile="Unknown-$(ProjectName).zip" />
   </Target>
   
   <Target Name="GenerateIconPng" BeforeTargets="BeforeBuild" Inputs="icon.svg" Outputs="$(OutDir)icon.png">

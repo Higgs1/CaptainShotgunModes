@@ -194,8 +194,6 @@ namespace CaptainShotgunModes {
     }
 
     public void Update() {
-      DPad.Update();
-
       if (IsKeyDown(SelectNormalMode.Value)) 
         fireMode = FireMode.Normal;
       else if (IsKeyDown(SelectAutoMode.Value))
@@ -210,6 +208,7 @@ namespace CaptainShotgunModes {
       }
       
       if (EnableModeSelectionWithDPad.Value) {
+        DPad.Update();
         if (DPad.GetInputDown(DPadInput.Right) || DPad.GetInputDown(DPadInput.Down))
           CycleFireMode();
         else if (DPad.GetInputDown(DPadInput.Left) || DPad.GetInputDown(DPadInput.Up))

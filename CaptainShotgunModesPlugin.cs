@@ -169,19 +169,18 @@ namespace CaptainShotgunModes {
       RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(EnableModeSelectionWithMouseWheel));
       RiskOfOptions.ModSettingsManager.AddOption(new RiskOfOptions.Options.CheckBoxOption(EnableModeSelectionWithDPad));
       
-      using (System.IO.Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("icon")) {
-        Texture2D texture = new Texture2D(0, 0);
-        byte[] imgdata = new byte[stream.Length];
-        stream.Read(imgdata, 0, (int) stream.Length);
-        if (ImageConversion.LoadImage(texture, imgdata))
-          RiskOfOptions.ModSettingsManager.SetModIcon(
-            Sprite.Create(
-              texture,
-              new Rect(0, 0, texture.width, texture.height),
-              new Vector2(0, 0)
-            )
-          );
-      }
+      using var stream = GetType().Assembly.GetManifestResourceStream("icon");
+      var texture = new Texture2D(0, 0);
+      var imgdata = new byte[stream.Length];
+      stream.Read(imgdata, 0, imgdata.Length);
+      if (ImageConversion.LoadImage(texture, imgdata))
+        RiskOfOptions.ModSettingsManager.SetModIcon(
+          Sprite.Create(
+            texture,
+            new Rect(0, 0, texture.width, texture.height),
+            new Vector2(0, 0)
+          )
+        );
     }
     
     private bool IsKeyDown(KeyboardShortcut shortcut) {
